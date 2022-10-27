@@ -72,3 +72,21 @@ export const Posts = [
     comment: 3,
   },
 ];
+
+export const SidebarFriends = [
+  {
+    id: 1,
+    name: "luffy",
+    image: "assets/friend/onepiece01_luffy.png",
+  },
+  {
+    id: 2,
+    name: "zoro",
+    image: "assets/friend/onepiece02_zoro_bandana.png",
+  },
+  {
+    id: 3,
+    name: "nami",
+    image: "assets/friend/onepiece03_nami.png",
+  },
+];

@@ -1,8 +1,11 @@
 import React from 'react'
 import { Bookmark, Home, Notifications, Person, Search, Settings } from '@mui/icons-material'
 import "./Sidebar.css";
+import { Users, SidebarFriends } from "../../dummyData"; // ダミーデータをUsersで使えるようになる
+import SidebarFriend from '../sidebarFriend/SidebarFriend';
 
-export default function Sidebar() {
+export default function Sidebar(sidebarFriend) {
+  // console.log(SidebarFriends[1].name);
   return (
     <div className='sidebar'>
       <div className="sidebarWrapper">
@@ -34,18 +37,9 @@ export default function Sidebar() {
         </ul>
         <hr className="sidebarHr" />
         <ul className="sidebarFriendList">
-          <li className="sidebarFriend">
-            <img src="/assets/person/2.jpeg" alt="" className='sidebarFriendImg' />
-            <span className="sidebarFriendName">Kazuma Code</span>
-          </li>
-          <li className="sidebarFriend">
-            <img src="/assets/person/3.jpeg" alt="" className='sidebarFriendImg' />
-            <span className="sidebarFriendName">hoge</span>
-          </li>
-          <li className="sidebarFriend">
-            <img src="/assets/person/3.jpeg" alt="" className='sidebarFriendImg' />
-            <span className="sidebarFriendName">fuga</span>
-          </li>
+          {SidebarFriends.map((friend) => (
+            <SidebarFriend friend={friend} key={friend.id} /> //props friend
+          ))}
         </ul>
       </div>
     </div>
