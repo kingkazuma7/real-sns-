@@ -89,3 +89,44 @@
   padding-bottom: 20px;
   font-size: 16px;
 }
+
+.rightbarTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.rightbarInfo {
+  margin-bottom: 30px;
+}
+.rightbarInfoItem {
+  margin-bottom: 10px;
+}
+.rightbarInfoKey {
+  font-weight: bold;
+  margin-right: 5px;
+  color: #555;
+}
+.rightbarFollowing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 5px 0 0;
+}
+.rightbarFollowing:last-of-type {
+  margin: 0;
+}
+.rightbarFollowings {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+.rightbarFollowingImg {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+.rightbarFollowingName {
+  font-size: 12px;
+}
