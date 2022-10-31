@@ -33,6 +33,7 @@ export default function Rightbar({ profile }) {
   };
   
   const ProfileRightbar = () => {
+    const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
     return (
       <>
       <h4 className="rightbarTitle">ユーザー情報</h4>
@@ -44,23 +45,23 @@ export default function Rightbar({ profile }) {
         <h5 className="rightbarTitle">あなたの友達</h5>
         <div className="rightbarFollowings">
           <div className="rightbarFollowing">
-            <img src="assets/person/1.jpeg" className='rightbarFollowingImg' alt="" />
+            <img src={PUBLIC_FOLDER + "/person/1.jpeg"} className='rightbarFollowingImg' alt="" />
             <span className="rightbarFollowingName">Kazuma Code</span>
           </div>
           <div className="rightbarFollowing">
-            <img src="assets/person/2.jpeg" className='rightbarFollowingImg' alt="" />
+            <img src={PUBLIC_FOLDER + "/person/2.jpeg"} className='rightbarFollowingImg' alt="" />
             <span className="rightbarFollowingName">yamaki</span>
           </div>
           <div className="rightbarFollowing">
-            <img src="assets/person/3.jpeg" className='rightbarFollowingImg' alt="" />
+            <img src={PUBLIC_FOLDER + "/person/3.jpeg"} className='rightbarFollowingImg' alt="" />
             <span className="rightbarFollowingName">hoge</span>
           </div>
           <div className="rightbarFollowing">
-            <img src="assets/person/4.jpeg" className='rightbarFollowingImg' alt="" />
+            <img src={PUBLIC_FOLDER + "/person/4.jpeg"} className='rightbarFollowingImg' alt="" />
             <span className="rightbarFollowingName">fuga</span>
           </div>
           <div className="rightbarFollowing">
-            <img src="assets/person/5.jpeg" className='rightbarFollowingImg' alt="" />
+            <img src={PUBLIC_FOLDER + "/person/5.jpeg"} className='rightbarFollowingImg' alt="" />
             <span className="rightbarFollowingName">soge</span>
           </div>
         </div>

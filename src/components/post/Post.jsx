@@ -4,11 +4,6 @@ import "./Post.css";
 import { Users } from '../../dummyData'; 
 
 export default function Post({ post }) {
-  // console.log(post.date);
-  // const user = Users.filter((user) => user.id === 2);
-  // console.log(user[0]);
-  // console.log(Users.filter((user) => user.id === post.id));
-  // console.log(Users.filter((user) => user.id === post.id)[0]);
   
   /* いいねのclick */
   //const [状態変数, 状態を変更するための関数] = useState(状態の初期値);
@@ -20,11 +15,12 @@ export default function Post({ post }) {
     setIsLiked(!isLiked);
   }
   
+  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <div className='post'>
       <div className="postTop">
         <div className="postTopLeft">
-          <img src={Users.filter((user) => user.id === post.id)[0].profilePicture } alt="" className='postProfileImg' />
+          <img src={PUBLIC_FOLDER + Users.filter((user) => user.id === post.id)[0].profilePicture } alt="" className='postProfileImg' />{/* dbからパスを持ってくる */}
           <span className="postUsername">{Users.filter((user) => user.id === post.id)[0].username}</span>
           <div className="postDate">{post.date}</div>
         </div>
@@ -34,11 +30,11 @@ export default function Post({ post }) {
       </div>
       <div className="postCenter">
         <span className="postText">{post.desc}</span>
-        <img src="./assets/post/1.jpeg" alt="" className='postImg' />
+        <img src={PUBLIC_FOLDER + "/post/1.jpeg"} alt="" className='postImg' />
       </div>
       <div className="postBottom">
         <div className="postBottomLeft">
-          <img src="./assets/heart.png" alt="" className='likeIcon' onClick={() => haldleLike()} />
+          <img src={PUBLIC_FOLDER + "/heart.png"} alt="" className='likeIcon' onClick={() => haldleLike()} />
           <span className="postLikeCounter">{like}人がいいねを押しました</span>
         </div>
         <div className="postBottomRight">

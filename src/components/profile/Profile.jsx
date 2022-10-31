@@ -7,7 +7,7 @@ import "./Profile.css";
 
 export default function Profile() {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
-  console.log(PUBLIC_FOLDER);
+  // console.log(PUBLIC_FOLDER);
   return (
     <>
       <Topbar />
