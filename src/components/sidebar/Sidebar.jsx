@@ -3,6 +3,7 @@ import { Bookmark, Home, Notifications, Person, Search, Settings } from '@mui/ic
 import "./Sidebar.css";
 import { Users, SidebarFriends } from "../../dummyData"; // ダミーデータをUsersで使えるようになる
 import SidebarFriend from '../sidebarFriend/SidebarFriend';
+import { Link } from 'react-router-dom';
 
 export default function Sidebar(sidebarFriend) {
   // console.log(SidebarFriends[1].name);
@@ -12,7 +13,9 @@ export default function Sidebar(sidebarFriend) {
         <ul className="sidebarList">
           <li className="sidebarListItem">
             <Home className="sidebarIcon" />
-            <span className="sidebarListItemText">ホーム</span>
+            <Link to="/">
+              <span className="sidebarListItemText">ホーム</span>
+            </Link>
           </li>
           <li className="sidebarListItem">
             <Search className="sidebarIcon" />
@@ -28,7 +31,9 @@ export default function Sidebar(sidebarFriend) {
           </li>
           <li className="sidebarListItem">
             <Person className="sidebarIcon" />
-            <span className="sidebarListItemText">プロフィール</span>
+            <Link to="profile:kazuma">
+              <span className="sidebarListItemText">プロフィール</span>
+            </Link>
           </li>
           <li className="sidebarListItem">
             <Settings className="sidebarIcon" />
