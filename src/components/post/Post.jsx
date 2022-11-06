@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { MoreVert } from "@mui/icons-material"
 import "./Post.css";
-import { Users } from '../../dummyData'; 
+// import { Users } from '../../dummyData'; 
+import axios from "axios";
 
 export default function Post({ post }) {
-  
   /* いいねのclick */
   //const [状態変数, 状態を変更するための関数] = useState(状態の初期値);
   const [like, setLike] = useState(post.like);
@@ -15,13 +15,23 @@ export default function Post({ post }) {
     setIsLiked(!isLiked);
   }
   
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await axios.get(`/users/${post.userId}`);
+      console.log(response);
+      setUser(response.data);
+    };
+    fetchUser();
+  }, []);
+  
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <div className='post'>
       <div className="postTop">
         <div className="postTopLeft">
-          <img src={PUBLIC_FOLDER + Users.filter((user) => user.id === post.id)[0].profilePicture } alt="" className='postProfileImg' />{/* dbからパスを持ってくる */}
-          <span className="postUsername">{Users.filter((user) => user.id === post.id)[0].username}</span>
+          <img src={user.profilePicture || PUBLIC_FOLDER + "/person/noAvatar.png" } alt="" className='postProfileImg' />{/* dbからパスを持ってくる */}
+          <span className="postUsername">{user.username}</span>
           <div className="postDate">{post.date}</div>
         </div>
         <div className="postTopRight">

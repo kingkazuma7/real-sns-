@@ -70,7 +70,6 @@ export default function Rightbar({ profile }) {
     )
   };
   
-  console.log(<ProfileRightbar />);
   return (
     <div className="rightbar">
       <div className="rightbarWrapper">

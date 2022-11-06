@@ -31,7 +31,7 @@ export default function Sidebar(sidebarFriend) {
           </li>
           <li className="sidebarListItem">
             <Person className="sidebarIcon" />
-            <Link to="profile:kazuma">
+            <Link to="profile/kazuma">
               <span className="sidebarListItemText">プロフィール</span>
             </Link>
           </li>
