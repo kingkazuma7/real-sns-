@@ -5,13 +5,15 @@ import "./Timeline.css"
 // import { Posts } from '../../dummyData'
 import axios from "axios";
 
-export default function Timeline() {
+export default function Timeline({ username }) {
   const [posts, setPosts] = useState([]);
   // console.log(axios);
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await axios.get("/posts/timeline/634cc0bfb1468cea62239896");
-      console.log(response);
+      const response = username
+      ? await axios.get(`/posts/profile/${username}`)
+      : await axios.get("/posts/timeline/634cc0bfb1468cea62239896");
+      // console.log(response);
       setPosts(response.data);
     };
     fetchPosts();
@@ -22,7 +24,7 @@ export default function Timeline() {
       <div className="timelineWrapper">
         <Share />
         {posts.map((post) => (
-          <Post post={post} key={post.id} />
+          <Post post={post} key={post._id} />
         ))}
       </div>
     </div>
