@@ -3,7 +3,7 @@ import "./Rightbar.css"
 import { Users } from "../../dummyData"
 import Online from '../online/Online'
 
-export default function Rightbar({ profile }) {
+export default function Rightbar({ user }) {
   // console.log(Users);
   const HomeRightbar = () => {
     return (
@@ -75,7 +75,7 @@ export default function Rightbar({ profile }) {
       <div className="rightbarWrapper">
         {/* Rightbar内にprofile Propsがあれば ... ProfileRightbar()を */}
         {/* Rightbar内にprofile Propsがなければ ... HomeRightbar()を */}
-        {profile ? <ProfileRightbar /> : <HomeRightbar /> }
+        {user ? <ProfileRightbar /> : <HomeRightbar /> }
       </div>
     </div>
   )
