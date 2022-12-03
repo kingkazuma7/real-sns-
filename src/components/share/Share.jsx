@@ -1,13 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Analytics, Face, Gif, Image } from "@mui/icons-material"
 import "./Share.css"
+import { AuthContext } from '../../state/AuthContext';
 
 export default function Share() {
+  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  const { user } = useContext(AuthContext); // ログインuser
+  
   return (
     <div className='share'>
       <div className="shareWrapper">
         <div className="shareTop">
-          <img src="/assets/person/1.jpeg" alt="" className='shareProfileImg' />
+          {/* <img src="/assets/person/1.jpeg" alt="" className='shareProfileImg' /> */}
+          <img src={
+            user.profilePicture
+            ? PUBLIC_FOLDER + user.profilePicture
+            : PUBLIC_FOLDER + "/person/noAvatar.png"
+            }
+            alt=""
+            className='shareProfileImg'
+          />{/* dbからパスを持ってくる */}
           <input type="text" className='shareInput' placeholder='今何してるの？' />
         </div>
         <hr className='shareHr' />

@@ -4,6 +4,9 @@ import "./Post.css";
 // import { Users } from '../../dummyData'; 
 import axios from "axios";
 import { format } from "timeago.js"
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../state/AuthContext';
 
 export default function Post({ post }) {
   /* いいねのclick */
@@ -11,30 +14,50 @@ export default function Post({ post }) {
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   
-  const haldleLike = () => {
+  
+  const handleLike = async () => {
+    try {
+      // いいねのAPIをたたく
+      await axios.put(`/posts/${post._id}/like`, { userId: currentUser._id });
+    } catch (error) {
+      console.log(error);
+    }
+    
     setLike(isLiked ? like -1 : like + 1) // 押された情報
     setIsLiked(!isLiked);
   }
   
   const [user, setUser] = useState({});
+  const { user: currentUser } = useContext(AuthContext); // ログインuser
+  
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await axios.get(`/users/${post.userId}`);
+      const response = await axios.get(`/users?userId=${post.userId}`); //apiを叩いてる
       // console.log(response);
       setUser(response.data);
     };
     fetchUser();
-  }, []);
-  
+  }, [post.userId]);
   
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  
   return (
     <div className='post'>
       <div className="postTop">
         <div className="postTopLeft">
-          <img src={user.profilePicture || PUBLIC_FOLDER + "/person/noAvatar.png" } alt="" className='postProfileImg' />{/* dbからパスを持ってくる */}
+          <Link to={`profile/${user.username}`}>
+            <img
+              src={
+                user.profilePicture
+                ? PUBLIC_FOLDER + user.profilePicture
+                : PUBLIC_FOLDER + "person/noAvatar.png"
+              }
+              alt=""
+              className="postProfileImg"
+            />
+          </Link>
           <span className="postUsername">{user.username}</span>
-          <div className="postDate">{format(post.createdAt)}</div>
+          <span className="postDate">{format(post.createdAt)}</span>
         </div>
         <div className="postTopRight">
           <MoreVert />
@@ -46,7 +69,7 @@ export default function Post({ post }) {
       </div>
       <div className="postBottom">
         <div className="postBottomLeft">
-          <img src={PUBLIC_FOLDER + "/heart.png"} alt="" className='likeIcon' onClick={() => haldleLike()} />
+          <img src={PUBLIC_FOLDER + "/heart.png"} alt="" className='likeIcon' onClick={() => handleLike()} />
           <span className="postLikeCounter">{like}人がいいねを押しました</span>
         </div>
         <div className="postBottomRight">
