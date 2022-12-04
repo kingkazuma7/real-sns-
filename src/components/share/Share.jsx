@@ -1,11 +1,27 @@
-import React, { useContext } from 'react'
-import { Analytics, Face, Gif, Image } from "@mui/icons-material"
+import React, { useContext, useRef } from 'react'
+import { Analytics, DeblurOutlined, Face, Gif, Image, LineAxisOutlined } from "@mui/icons-material"
 import "./Share.css"
+import axios from "axios";
 import { AuthContext } from '../../state/AuthContext';
 
 export default function Share() {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user } = useContext(AuthContext); // ログインuser
+  const desc = useRef(); // useRefでinputの情報を取得
+  
+  const handleSubmit = async (e) => { //関数受取
+    e.preventDefault();
+    const newPost = {
+      userId: user._id, //login user
+      desc: desc.current.value, //投稿中身
+    }
+    try {
+      await axios.post("/posts", newPost);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  }
   
   return (
     <div className='share'>
@@ -20,10 +36,10 @@ export default function Share() {
             alt=""
             className='shareProfileImg'
           />{/* dbからパスを持ってくる */}
-          <input type="text" className='shareInput' placeholder='今何してるの？' />
+          <input type="text" className='shareInput' placeholder='今何してるの？' ref={desc} />
         </div>
         <hr className='shareHr' />
-        <div className="shareButtons">
+        <form className="shareButtons" onSubmit={(e) => handleSubmit(e)}>
           <div className="shareOptions">
             <div className="shareOption">
               <Image className='shareIcon' htmlColor='blue' />
@@ -42,8 +58,8 @@ export default function Share() {
               <span className="shareOptionText">投票</span>
             </div>
           </div>
-          <button className="shareButton">投稿</button>
-        </div>
+          <button className="shareButton" type="submit">投稿</button>
+        </form>
       </div>
     </div>
   )
