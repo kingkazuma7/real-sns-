@@ -18,6 +18,22 @@ export default function Share() {
       userId: user._id, //login user
       desc: desc.current.value, //投稿中身
     }
+    
+    if (file) {
+      const data = new FormData(); // keyとvalueをもつ
+      const fileName = Date.now() + file.name;
+      data.append("name", fileName);
+      data.append("file", file);
+      newPost.img = fileName;
+      
+      try {
+        // 画像APIを叩く
+        await axios.post("upload", data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    
     try {
       await axios.post("/posts", newPost);
       window.location.reload();
