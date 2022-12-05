@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { Analytics, DeblurOutlined, Face, Gif, Image, LineAxisOutlined } from "@mui/icons-material"
 import "./Share.css"
 import axios from "axios";
@@ -8,6 +8,9 @@ export default function Share() {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user } = useContext(AuthContext); // ログインuser
   const desc = useRef(); // useRefでinputの情報を取得
+  
+  const [file, setFile] = useState(null);
+  console.log(file);
   
   const handleSubmit = async (e) => { //関数受取
     e.preventDefault();
@@ -41,10 +44,11 @@ export default function Share() {
         <hr className='shareHr' />
         <form className="shareButtons" onSubmit={(e) => handleSubmit(e)}>
           <div className="shareOptions">
-            <div className="shareOption">
+            <label className="shareOption" htmlFor='file' onChange={(e) => setFile(e.target.files[0])}>
               <Image className='shareIcon' htmlColor='blue' />
               <span className="shareOptionText">写真</span>
-            </div>
+              <input type="file" id="file" accept='image/*' style={{display: "none"}} />
+            </label>
             <div className="shareOption">
               <Gif className='shareIcon' htmlColor='hotpink' />
               <span className="shareOptionText">GIF</span>
